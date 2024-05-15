@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Add Subject</h1>
-<form method="POST" action="{{ url_for('add_subject') }}">
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="name" required>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h3 class="mb-4 text-primary">Add Subject</h3>
+                    <form method="POST" action="{{ url_for('add_subject') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label text-secondary">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="educator" class="form-label text-secondary">Educator</label>
+                            <select class="form-select" id="educator_id" name="educator_id" required>
+                                {% for educator in educators %}
+                                <option value="{{ educator.id }}">{{ educator.username }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Subject</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="educator" class="form-label">Educator</label>
-        <select class="form-select" id="educator_id" name="educator_id" required>
-            {% for educator in educators %}
-            <option value="{{ educator.id }}">{{ educator.username }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Subject</button>
-</form>
+</div>
 {% endblock %}

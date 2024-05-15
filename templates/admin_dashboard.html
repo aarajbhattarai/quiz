@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Admin Dashboard</h1>
-<h2>Educators:</h2>
-<ul>
-    {% for educator in educators %}
-    <li>{{ educator.username }}</li>
-    {% endfor %}
-</ul>
-<a href="{{ url_for('add_educator') }}" class="btn btn-primary">Add Educator</a>
-<a href="{{ url_for('add_subject') }}" class="btn btn-primary">Add Subject</a>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h1 class="mb-4 text-primary">Admin Dashboard</h1>
+                    <h2 class="mb-3 text-secondary">Educators:</h2>
+                    <ul class="list-group mb-4">
+                        {% for educator in educators %}
+                        <li class="list-group-item">{{ educator.username }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{{ url_for('add_educator') }}" class="btn btn-primary mb-2">Add Educator</a>
+                    <a href="{{ url_for('add_subject') }}" class="btn btn-primary mb-2">Add Subject</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

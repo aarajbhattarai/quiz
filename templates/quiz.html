@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Quiz</h1>
-<div>
-<form method="POST" action="{{ url_for('quiz', subject_id=subject_id) }}">
-    
-    {% for question in questions %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{ loop.index }}. {{ question.question_text }}</h5>
-            {% set options = question.options.split(',') %}
-            {% for option in options %}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="question_{{ question.id }}_{{ loop.index }}" value="{{ loop.index }}">
-                <label class="form-check-label" for="question_{{ question.id }}_{{ loop.index }}">
-                    {{ option }}
-                </label>
+<div class="container py-5">
+    <h1 class="mb-5 text-center">Quiz</h1>
+    <form method="POST" action="{{ url_for('quiz', subject_id=subject_id) }}">
+        {% for question in questions %}
+        <div class="card mb-4 shadow">
+            <div class="card-header py-3">
+                <h5 class="mb-0">{{ loop.index }}. {{ question.question_text }}</h5>
             </div>
-            {% endfor %}
+            <div class="card-body">
+                {% set options = question.options.split(',') %}
+                {% for option in options %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="question_{{ question.id }}" id="question_{{ question.id }}_{{ loop.index }}" value="{{ loop.index }}">
+                    <label class="form-check-label" for="question_{{ question.id }}_{{ loop.index }}">
+                        {{ option }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Submit</button> -->
-</form> 
+        {% endfor %}
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

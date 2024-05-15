@@ -6,8 +6,8 @@
         <div class="col-md-6">
             <div class="card border-0 shadow">
                 <div class="card-body">
-                    <h3 class="mb-4 text-primary">Login as a Educator, Teacher or Student</h3>
-                    <form method="POST" action="{{ url_for('login') }}">
+                    <h3 class="mb-4 text-primary">Register</h3>
+                    <form method="POST" action="{{ url_for('register') }}">
                         <div class="mb-3">
                             <label for="username" class="form-label text-secondary">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required>
@@ -16,7 +16,16 @@
                             <label for="password" class="form-label text-secondary">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <div class="mb-3">
+                            <label for="role" class="form-label text-secondary">Role</label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
                     </form>
                 </div>
             </div>

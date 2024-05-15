@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Add Educator</h1>
-<form method="POST" action="{{ url_for('add_educator') }}">
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h3 class="mb-4 text-primary">Add Educator</h3>
+                    <form method="POST" action="{{ url_for('add_educator') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label text-secondary">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label text-secondary">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Educator</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="mb-3">
-        <label for="role" class="form-label">Role</label>
-        <select class="form-select" id="role" name="role" required>
-            <option value="educator">Educator</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Educator</button>
-</form>
+</div>
 {% endblock %}

@@ -34,6 +34,24 @@ class Question(db.Model):
 def index():
     return render_template('index.html')
 
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        role = request.form.get('role')
+        
+
+        new_user = User(username=username, password=password, role=role)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Registration successful!', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -48,6 +66,12 @@ def login():
         else:
             flash('Invalid username or password!', 'danger')
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been logged out!', 'success')
+    return redirect(url_for('index'))
 
 @app.route('/dashboard')
 def dashboard():
@@ -148,17 +172,17 @@ def add_migrate():
     educator_user_2 = User(username='educator2', password='password', role='educator')
     student_user = User(username='student', password='password', role='student')
 
-# Create subjects and assign educators
+    # Create subjects and assign educators
     subject_1 = Subject(name='Math', educator=educator_user_1)
     subject_2 = Subject(name='Science', educator=educator_user_2)
     subject_3 = Subject(name='History', educator=educator_user_1)
 
-# Create questions for each subject
+    # Create questions for each subject
     question_1 = Question(question_text='What is 2 + 2?', options='1, 2, 3, 4', answer='D', subject=subject_1)
     question_2 = Question(question_text='What is the capital of France?', options='Paris, London, Berlin, Madrid', answer='A', subject=subject_3)
     question_3 = Question(question_text='What is the symbol for sodium on the periodic table?', options='Na, K, Ca, Mg', answer='A', subject=subject_2)
 
-# Add objects to the session and commit
+    # Add objects to the session and commit
     db.session.add_all([admin_user, educator_user_1, educator_user_2, student_user,
                     subject_1, subject_2, subject_3,
                     question_1, question_2, question_3])
